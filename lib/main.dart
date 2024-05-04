@@ -1,27 +1,11 @@
 import 'dart:io';
-import 'package:flutter_dreamscape/repositories/collection/collection_repository.dart';
-import 'package:flutter_dreamscape/repositories/collection/collection_repository_abstract.dart';
-import 'package:get_it/get_it.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_dreamscape/app.dart';
-import 'package:flutter_dreamscape/repositories/auth/auth.dart';
-import 'package:flutter_dreamscape/repositories/user/user.dart';
-import 'package:flutter_dreamscape/repositories/image/image.dart';
+import 'package:flutter_dreamscape/injection_container.dart' as di;
 
-void main() {
-  GetIt.I.registerLazySingleton<UserRepostiryAbstract>(() => UserRepository());
-
-  GetIt.I
-      .registerLazySingleton<ImageRepositoryAbstract>(() => ImageRepository());
-
-  GetIt.I.registerLazySingleton<CollectionRepositoryAbstract>(
-      () => CollectionRepository());
-
-  GetIt.I.registerLazySingleton<AuthRepositoryAbstract>(() => AuthRepository());
-
+Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
-
+  await di.init();
   runApp(const App());
 }
 

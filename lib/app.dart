@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dreamscape/blocs/auth/auth_bloc.dart';
-import 'package:flutter_dreamscape/features/image_list/image_list.dart';
-import 'package:flutter_dreamscape/features/login/login.dart';
-import 'package:flutter_dreamscape/features/profile/view/profile_screen.dart';
-import 'package:flutter_dreamscape/features/upload/upload.dart';
-import 'package:flutter_dreamscape/repositories/image/models/get_image_list_params.dart';
+import 'package:flutter_dreamscape/core/blocs/auth/auth_bloc.dart';
+import 'package:flutter_dreamscape/domain/usecase/image/get_paged_image_list.dart';
+import 'package:flutter_dreamscape/feature/image_list/image_list.dart';
+import 'package:flutter_dreamscape/feature/login/login.dart';
+import 'package:flutter_dreamscape/feature/profile/view/profile_screen.dart';
+import 'package:flutter_dreamscape/feature/upload/upload.dart';
 import 'package:flutter_dreamscape/theme/theme.dart';
 
 class App extends StatelessWidget {
@@ -67,18 +67,18 @@ class _NavigationState extends State<Navigation> {
         return CupertinoTabView(
           builder: (BuildContext context) {
             return <Widget>[
-              ImageListScreen(params: GetImageListParams()),
+              const ImageListScreen(params: ParamsGetPagedImageList()),
               BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
                 if (state is AuthAuthenticatedState) {
                   return const UploadScreen();
                 }
-                return LoginScreen();
+                return const LoginScreen();
               }),
               BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
                 if (state is AuthAuthenticatedState) {
                   return ProfileScreen(userId: state.user.id);
                 }
-                return LoginScreen();
+                return const LoginScreen();
               })
             ][index];
           },

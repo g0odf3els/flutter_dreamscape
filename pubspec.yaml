@@ -40,10 +40,13 @@ dependencies:
   jwt_decoder: ^2.0.1
   flutter_secure_storage: ^9.0.0
   flutter_form_builder: ^9.2.1
+  flutter_file_dialog: ^3.0.2
   form_builder_validators: ^9.1.0
   multi_dropdown: ^2.1.4
   http_parser: ^4.0.2
   image_picker: ^1.0.7
+  dartz: ^0.10.1
+  path_provider: ^2.1.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
